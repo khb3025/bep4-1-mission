@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -16,7 +17,10 @@ import static jakarta.persistence.FetchType.LAZY;
 
 import com.back.boundedContext.member.entity.Member;
 import com.back.global.jpa.entity.BaseIdAndTime;
+import com.back.shared.post.dto.PostCommentDto;
+import com.back.shared.post.event.PostCommentCreatedEvent;
 
+@Getter 
 @Entity
 @NoArgsConstructor
 public class Post extends BaseIdAndTime {
@@ -38,7 +42,10 @@ public class Post extends BaseIdAndTime {
         PostComment postComment = new PostComment(this, author, content);
 
         comments.add(postComment);
-        author.increaseActivityScore(1);
+        // TODO : 이벤트 수정
+        // author.increaseActivityScore(1);
+        publishEvent(new PostCommentCreatedEvent(new PostCommentDto(postComment)));
+        
         return postComment;
     }
 

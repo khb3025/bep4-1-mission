@@ -2,6 +2,7 @@ package com.back.boundedContext.member.app;
 
 import java.util.Optional;
 
+import com.back.global.RsData.RsData;
 import org.springframework.stereotype.Service;
 
 import com.back.boundedContext.member.domain.Member;
@@ -22,7 +23,7 @@ public class MemberFacade {
     }
 
     @Transactional
-    public Member join(String username, String password, String nickname) {
+    public RsData<Member> join(String username, String password, String nickname) {
         return memberJoinUseCase.join(username, password, nickname);
     }
 

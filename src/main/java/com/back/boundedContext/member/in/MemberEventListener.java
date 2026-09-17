@@ -1,4 +1,4 @@
-package com.back.boundedContext.member.eventListener;
+package com.back.boundedContext.member.in;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.transaction.event.TransactionPhase;
 
-import com.back.boundedContext.member.entity.Member;
-import com.back.boundedContext.member.service.MemberService;
+import com.back.boundedContext.member.domain.Member;
+import com.back.boundedContext.member.app.MemberService;
 import com.back.shared.post.event.PostCommentCreatedEvent;
 import com.back.shared.post.event.PostCreatedEvent;
 

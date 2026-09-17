@@ -1,4 +1,4 @@
-package com.back.entity;
+package com.back.boundedContext.post.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,8 +14,8 @@ import static jakarta.persistence.CascadeType.REMOVE;
 
 import static jakarta.persistence.FetchType.LAZY;
 
-import com.back.jpa.entity.BaseIdAndTime;
-import com.back.jpa.entity.PostComment;
+import com.back.boundedContext.member.entity.Member;
+import com.back.global.jpa.entity.BaseIdAndTime;
 
 @Entity
 @NoArgsConstructor

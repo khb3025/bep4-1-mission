@@ -2,6 +2,7 @@ package com.back.boundedContext.post.app;
 
 import java.util.Optional;
 
+import com.back.global.RsData.RsData;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ public class PostFacade {
     }
 
     @Transactional
-    public Post write(Member author, String title, String content) {
+    public RsData<Post> write(Member author, String title, String content) {
         return postWriteUseCase.write(author, title, content);
     }
 

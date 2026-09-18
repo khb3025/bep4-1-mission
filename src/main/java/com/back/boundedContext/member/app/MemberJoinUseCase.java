@@ -2,6 +2,9 @@ package com.back.boundedContext.member.app;
 
 
 import com.back.global.RsData.RsData;
+import com.back.global.eventPublisher.EventPublisher;
+import com.back.shared.member.dto.MemberDto;
+import com.back.shared.member.event.MemberJoinedEvent;
 import org.springframework.stereotype.Service;
 
 import com.back.boundedContext.member.domain.Member;
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberJoinUseCase {
     private final MemberRepository memberRepository;
+    private final EventPublisher eventPublisher;
 
     public RsData<Member> join(String username, String password, String nickname) {
         memberRepository.findByUsername(username).ifPresent(m -> {
@@ -21,7 +25,7 @@ public class MemberJoinUseCase {
         });
         Member joinMember = new Member(username, password, nickname);
         memberRepository.save(joinMember);
-
+        eventPublisher.publish(new MemberJoinedEvent(new MemberDto(joinMember)));
         return new RsData<>("200-1", "%s님의 회원가입을 환영합니다.".formatted(joinMember.getUsername()), joinMember );
     }
 }

@@ -1,5 +1,6 @@
 package com.back.boundedContext.post.app;
 
+import java.util.Dictionary;
 import java.util.Optional;
 
 import com.back.boundedContext.post.domain.PostMember;
@@ -28,7 +29,7 @@ public class PostFacade {
     }
 
     @Transactional
-    public RsData<Post> write(Member author, String title, String content) {
+    public RsData<Post> write(PostMember author, String title, String content) {
         return postWriteUseCase.write(author, title, content);
     }
 
@@ -50,5 +51,9 @@ public class PostFacade {
         );
 
         postMemberRepository.save(_member);
+    }
+
+    public Optional<PostMember> findMemberByUsername(String username) {
+        return postMemberRepository.findByUsername(username);
     }
 }

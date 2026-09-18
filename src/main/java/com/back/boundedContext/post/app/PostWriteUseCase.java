@@ -1,6 +1,7 @@
 package com.back.boundedContext.post.app;
 
 import com.back.boundedContext.member.app.MemberFacade;
+import com.back.boundedContext.post.domain.PostMember;
 import com.back.global.RsData.RsData;
 import com.back.shared.member.out.MemberApiClient;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class PostWriteUseCase {
     private final EventPublisher eventPublisher;
     private final MemberApiClient memberApiClient;
 
-    public RsData<Post> write(Member author, String title, String content) {
+    public RsData<Post> write(PostMember author, String title, String content) {
         Post post = postRepository.save(new Post(author, title, content));
 
         eventPublisher.publish(

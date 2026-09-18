@@ -1,9 +1,6 @@
 package com.back.boundedContext.post.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +20,7 @@ import com.back.shared.post.event.PostCommentCreatedEvent;
 @Getter 
 @Entity
 @NoArgsConstructor
+@Table(name="POST_POST")
 public class Post extends BaseIdAndTime {
     @ManyToOne (fetch = LAZY)
     private Member author;

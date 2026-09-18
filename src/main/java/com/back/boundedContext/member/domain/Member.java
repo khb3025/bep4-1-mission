@@ -4,12 +4,14 @@ import com.back.global.jpa.entity.BaseIdAndTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@Table(name = "MEMBER_MEMBER")
 public class Member extends BaseIdAndTime {
     @Column(unique = true)
     private String username;

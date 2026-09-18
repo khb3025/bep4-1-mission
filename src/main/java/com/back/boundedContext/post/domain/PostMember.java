@@ -1,23 +1,17 @@
 package com.back.boundedContext.post.domain;
 
-import com.back.global.jpa.entity.BaseIdAndTime;
-import com.back.global.jpa.entity.BaseIdAndTimeManual;
+import com.back.shared.member.domain.ReplicaMember;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+@Entity
 @Getter
 @NoArgsConstructor
 @Table(name = "POST_MEMBER")
-public class PostMember extends BaseIdAndTimeManual {
+public class PostMember extends ReplicaMember {
 
-    @Column(unique = true)
-    private String username;
-    private String password;
-    private String nickname;
-    private int activityScore;
-
-
+   public PostMember(String username, String password, String nickname) {
+        super(username, password, nickname);
+    }
 }

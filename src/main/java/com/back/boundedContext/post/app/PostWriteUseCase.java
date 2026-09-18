@@ -1,5 +1,6 @@
 package com.back.boundedContext.post.app;
 
+import com.back.boundedContext.member.app.MemberFacade;
 import com.back.global.RsData.RsData;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class PostWriteUseCase {
     private final PostRepository postRepository;
     private final EventPublisher eventPublisher;
+    private final MemberFacade memberFacade;
 
     public RsData<Post> write(Member author, String title, String content) {
         Post post = postRepository.save(new Post(author, title, content));
@@ -27,8 +29,10 @@ public class PostWriteUseCase {
                 )
         );
 
+        String randomTip = memberFacade.randomSecurityTip();
+
         return new RsData<>("201-1",
-                                "%d 번의 글이 생성되었습니다.".formatted(post.getId()),
+                                "%d 번의 글이 생성되었습니다. 보안 팁 : %s ".formatted(post.getId(), randomTip),
                             post);
     }
 }

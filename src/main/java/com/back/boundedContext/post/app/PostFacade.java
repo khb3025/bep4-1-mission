@@ -48,10 +48,6 @@ public class PostFacade {
                 member.getNickname()
         );
 
-        _member.setId(member.getId());
-        _member.setCreateDate(member.getCreateDate());
-        _member.setModifyDate(member.getModifyDate());
-
         postMemberRepository.save(_member);
     }
 }

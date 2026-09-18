@@ -39,7 +39,7 @@ public class MemberFacade {
         return memberRepository.findById(id);
     }
 
-    public String randomSecurityTip(){
+    public String getRandomSecurityTip(){
         return "비밀번호의 유효기간은 %d일 입니다."
                 .formatted(memberPolicy.getNeedToChangePasswordDays());
     }

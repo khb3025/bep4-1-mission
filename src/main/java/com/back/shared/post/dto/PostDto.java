@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// * @JsonCreator
+// Controller에서 반환하는건 Dto는 문제없음
+// ApiClient에서 받을때는 Json 역직렬화가 필요해서 붙임
 @AllArgsConstructor(
         onConstructor_ = @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 )

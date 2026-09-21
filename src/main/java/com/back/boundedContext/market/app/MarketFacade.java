@@ -1,0 +1,24 @@
+package com.back.boundedContext.market.app;
+
+import com.back.boundedContext.cash.domain.CashMember;
+import com.back.boundedContext.market.domain.MarketMember;
+import com.back.shared.Cash.dto.CashMemberDto;
+import com.back.shared.Cash.event.CashMemberCreateEvent;
+import com.back.shared.member.dto.MemberDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class MarketFacade {
+
+    private final MarketSupport marketSupport;
+    private final MarketSyncMemberUseCase marketSyncMemberUseCase;
+    @Transactional
+    public MarketMember syncMember(MemberDto member) {
+        return marketSyncMemberUseCase.syncMember(member);
+    }
+
+}

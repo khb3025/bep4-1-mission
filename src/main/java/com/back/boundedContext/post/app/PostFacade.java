@@ -1,6 +1,7 @@
 package com.back.boundedContext.post.app;
 
 import java.util.Dictionary;
+import java.util.List;
 import java.util.Optional;
 
 import com.back.boundedContext.post.domain.PostMember;
@@ -45,5 +46,10 @@ public class PostFacade {
 
     public Optional<PostMember> findMemberByUsername(String username) {
         return postSupport.findMemberByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Post> findByOrderByIdDesc() {
+        return postSupport.findByOrderByIdDesc();
     }
 }

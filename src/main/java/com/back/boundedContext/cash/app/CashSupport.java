@@ -25,4 +25,7 @@ public class CashSupport {
         return walletRepository.findByHolder(holder);
     }
 
+    public Optional<CashMember> findMemberById(int id) {
+        return cashMemberRepository.findById(id);
+    }
 }

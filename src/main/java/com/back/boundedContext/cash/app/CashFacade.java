@@ -2,8 +2,6 @@ package com.back.boundedContext.cash.app;
 
 import com.back.boundedContext.cash.domain.CashMember;
 import com.back.boundedContext.cash.domain.Wallet;
-import com.back.boundedContext.cash.out.CashMemberRepository;
-import com.back.boundedContext.cash.out.WalletRepository;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,37 +11,28 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CashFacade {
-    private final CashMemberRepository cashMemberRepository;
-    private final WalletRepository walletRepository;
 
+    private final CashSyncMemberUseCase cashSyncMemberUseCase;
+    private final CashCreateWalletUseCase cashCreateWalletUseCase;
+    private final CashSupport cashSupport;
+
+    @Transactional
     public CashMember syncMember(MemberDto member) {
-        CashMember _member = new CashMember(
-                member.getId(),
-                member.getCreateDate(),
-                member.getModifyDate(),
-                member.getUsername(),
-                "",
-                member.getNickname(),
-                member.getActivityScore()
-        );
-
-        return cashMemberRepository.save(_member);
+        return cashSyncMemberUseCase.syncMember(member);
     }
 
     @Transactional
     public Wallet createWallet(CashMember holder) {
-        Wallet wallet = new Wallet(holder);
-        return walletRepository.save(wallet);
+        return cashCreateWalletUseCase.createWallet(holder);
     }
 
-    @Transactional(readOnly = true)
     public Optional<CashMember> findMemberByUsername(String username) {
-        return cashMemberRepository.findByUsername(username);
+        return cashSupport.findMemberByUsername(username);
     }
 
-    @Transactional(readOnly = true)
     public Optional<Wallet> findWalletByHolder(CashMember holder) {
-        return walletRepository.findByHolder(holder);
+        return cashSupport.findWalletByHolder(holder);
     }
 }

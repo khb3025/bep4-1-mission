@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.datatransfer.Clipboard;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class MarketFacade {
     private final MarketSyncMemberUseCase marketSyncMemberUseCase;
     private final MarketCreateProductUseCase marketCreateProductUseCase;
     private final MarketCreateCartUseCase marketCreateCartUseCase;
-
+    private final MarketCreateOrderUseCase marketCreateOrderUseCase;
     @Transactional
     public MarketMember syncMember(MemberDto member) {
         return marketSyncMemberUseCase.syncMember(member);
@@ -69,5 +70,14 @@ public class MarketFacade {
 
     public Optional<Product> findProductById(int id) {
         return marketSupport.findProductById(id);
+    }
+
+    public long ordersCount() {
+        return marketSupport.ordersCount();
+    }
+
+    @Transactional
+    public RsData<Order> createOrder(Cart cart) {
+        return marketCreateOrderUseCase.createOrder(cart);
     }
 }

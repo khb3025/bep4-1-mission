@@ -19,13 +19,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class PostFacade {
-    private final PostRepository postRepository;
+    private final PostSupport postSupport;
+    private final PostSyncMemberUseCase postSyncMemberUseCase;
     private final PostWriteUseCase postWriteUseCase;
-    private final PostMemberRepository postMemberRepository;
 
     @Transactional (readOnly = true)
     public long count() {
-        return postRepository.count();
+        return postSupport.count();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Post> findById(int id) {
+        return postSupport.findById(id);
     }
 
     @Transactional
@@ -33,27 +38,12 @@ public class PostFacade {
         return postWriteUseCase.write(author, title, content);
     }
 
-    @Transactional(readOnly = true)
-    public Optional<Post> findById(int id) {
-        return postRepository.findById(id);
-    }
-
     @Transactional
     public void syncMember(MemberDto member) {
-        PostMember _member = new PostMember(
-                member.getId(),
-                member.getCreateDate(),
-                member.getModifyDate(),
-                member.getUsername(),
-                "",
-                member.getNickname(),
-                member.getActivityScore()
-        );
-
-        postMemberRepository.save(_member);
+        postSyncMemberUseCase.syncMember(member);
     }
 
     public Optional<PostMember> findMemberByUsername(String username) {
-        return postMemberRepository.findByUsername(username);
+        return postSupport.findMemberByUsername(username);
     }
 }

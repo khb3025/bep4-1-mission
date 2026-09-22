@@ -1,6 +1,6 @@
-package com.back.shared.Cash.out;
+package com.back.shared.cash.out;
 
-import com.back.shared.Cash.dto.WalletDto;
+import com.back.shared.cash.dto.WalletDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.back.shared.Cash.event;
+package com.back.shared.cash.event;
 
-import com.back.shared.Cash.dto.CashMemberDto;
+import com.back.shared.cash.dto.CashMemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

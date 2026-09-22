@@ -2,7 +2,7 @@ package com.back.boundedContext.cash.in;
 
 import com.back.boundedContext.cash.app.CashFacade;
 import com.back.boundedContext.cash.domain.CashMember;
-import com.back.shared.Cash.event.CashMemberCreateEvent;
+import com.back.shared.cash.event.CashMemberCreateEvent;
 import com.back.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.back.shared.member.event.MemberJoinedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;

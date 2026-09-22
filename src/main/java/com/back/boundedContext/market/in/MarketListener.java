@@ -1,18 +1,14 @@
 package com.back.boundedContext.market.in;
 
-import com.back.boundedContext.cash.domain.CashMember;
 import com.back.boundedContext.market.app.MarketFacade;
-import com.back.boundedContext.market.domain.MarketMember;
-import com.back.shared.Cash.event.CashOrderPaymentFailedEvent;
-import com.back.shared.Cash.event.CashOrderPaymentSucceededEvent;
+import com.back.shared.cash.event.CashOrderPaymentFailedEvent;
+import com.back.shared.cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.market.event.MarketMemberCreatedEvent;
 import com.back.shared.member.event.MemberJoinedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;

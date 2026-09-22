@@ -2,7 +2,7 @@ package com.back.boundedContext.cash.in;
 
 import com.back.boundedContext.cash.app.CashFacade;
 import com.back.boundedContext.cash.domain.Wallet;
-import com.back.shared.Cash.dto.WalletDto;
+import com.back.shared.cash.dto.WalletDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;

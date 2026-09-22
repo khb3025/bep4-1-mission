@@ -38,6 +38,8 @@ custom:
         secretKey: ${TOSS_PAYMENTS_SECRET_KEY}
     product:
       payoutRate: 90
+  payout:
+    readyWaitingDays: 14
 
 logging:
   level:

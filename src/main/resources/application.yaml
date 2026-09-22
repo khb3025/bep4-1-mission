@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: back
+  config:
+    import: optional:file:.env[.properties]
   profiles:
     active: dev
   output:
@@ -22,6 +24,13 @@ spring:
         highlight_sql: true
         use_sql_comments: true
         default_batch_fetch_size: 100
+
+custom:
+  market:
+    toss:
+      payments:
+        secretKey: ${TOSS_PAYMENTS_SECRET_KEY}
+
 logging:
   level:
     com.back: DEBUG

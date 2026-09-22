@@ -1,8 +1,5 @@
-package com.back.boundedContext.market.app;
+package com.back.boundedContext.market.domain;
 
-import com.back.boundedContext.market.domain.Cart;
-import com.back.boundedContext.market.domain.MarketMember;
-import com.back.boundedContext.market.domain.Product;
 import com.back.global.jpa.entity.BaseIdAndTime;
 import com.back.shared.market.dto.OrderDto;
 import com.back.shared.market.event.MarketOrderPaymentRequestedEvent;
@@ -26,7 +23,7 @@ public class Order extends BaseIdAndTime {
 
     private LocalDateTime requestPaymentDate; // 지불 요청 날짜
     private LocalDateTime paymentDate; // 지불 처리 날짜
-
+    private LocalDateTime cancelDate;
     @ManyToOne(fetch = LAZY)
     private MarketMember buyer;
     private long price;
@@ -80,4 +77,13 @@ public class Order extends BaseIdAndTime {
     public void cancelRequestPayment() {
         requestPaymentDate = null;
     }
+
+    public boolean isCanceled() {
+        return cancelDate != null;
+    }
+
+    public boolean isPaymentInProgress() {
+        return requestPaymentDate != null && paymentDate == null && cancelDate == null;
+    }
+
 }

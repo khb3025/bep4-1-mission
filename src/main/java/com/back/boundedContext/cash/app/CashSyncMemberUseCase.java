@@ -30,7 +30,7 @@ public class CashSyncMemberUseCase {
             )
         );
         if(isNew){
-            eventPublisher.publish(new CashMemberCreateEvent(new CashMemberDto(_member)));
+            eventPublisher.publish(new CashMemberCreateEvent(_member.toDto()));
         }
         return _member;
     }

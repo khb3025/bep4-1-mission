@@ -25,7 +25,7 @@ public class MemberJoinUseCase {
         });
         Member joinMember = new Member(username, password, nickname);
         memberRepository.save(joinMember);
-        eventPublisher.publish(new MemberJoinedEvent(new MemberDto(joinMember)));
+        eventPublisher.publish(new MemberJoinedEvent(joinMember.toDto()));
         return new RsData<>("200-1", "%s님의 회원가입을 환영합니다.".formatted(joinMember.getUsername()), joinMember );
     }
 }

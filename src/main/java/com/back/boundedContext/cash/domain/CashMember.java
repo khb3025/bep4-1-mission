@@ -1,6 +1,8 @@
 package com.back.boundedContext.cash.domain;
 
+import com.back.shared.Cash.dto.CashMemberDto;
 import com.back.shared.member.domain.ReplicaMember;
+import com.back.shared.member.dto.MemberDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -25,5 +27,16 @@ public class CashMember extends ReplicaMember {
     ) {
         super(id, createDate, modifyDate, username, password, nickname, activityScore);
 
+    }
+
+    public CashMemberDto toDto(){
+        return new CashMemberDto(
+                this.getId(),
+                this.getCreateDate(),
+                this.getModifyDate(),
+                this.getUsername(),
+                this.getNickname(),
+                this.getActivityScore()
+        );
     }
 }

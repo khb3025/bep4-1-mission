@@ -1,5 +1,6 @@
 package com.back.boundedContext.post.domain;
 
+import com.back.shared.post.dto.PostDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,12 +43,24 @@ public class Post extends BaseIdAndTime {
         comments.add(postComment);
         // TODO : 이벤트 수정
         // author.increaseActivityScore(1);
-        publishEvent(new PostCommentCreatedEvent(new PostCommentDto(postComment)));
+        publishEvent(new PostCommentCreatedEvent(postComment.toDto()));
         
         return postComment;
     }
 
     public boolean hasComments() {
         return !comments.isEmpty();
+    }
+
+    public PostDto toDto(){
+        return new PostDto(
+            this.getId(),
+            this.getCreateDate(),
+            this.getModifyDate(),
+            this.getAuthor().getId(),
+            this.getAuthor().getNickname(),
+            this.getTitle(),
+            this.getContent()
+        );
     }
 }

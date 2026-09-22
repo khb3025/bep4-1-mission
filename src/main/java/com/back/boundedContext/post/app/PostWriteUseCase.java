@@ -28,7 +28,7 @@ public class PostWriteUseCase {
 
         eventPublisher.publish(
                 new PostCreatedEvent(
-                        new PostDto(post)
+                        post.toDto()
                 )
         );
 

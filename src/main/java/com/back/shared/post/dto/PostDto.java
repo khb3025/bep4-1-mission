@@ -11,9 +11,8 @@ import lombok.Getter;
 // * @JsonCreator
 // Controller에서 반환하는건 Dto는 문제없음
 // ApiClient에서 받을때는 Json 역직렬화가 필요해서 붙임
-@AllArgsConstructor(
-        onConstructor_ = @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-)
+
+@AllArgsConstructor
 @Getter
 public class PostDto {
     private final int id;
@@ -24,15 +23,4 @@ public class PostDto {
     private final String title;
     private final String content;
 
-    public PostDto(Post post) {
-        this(
-            post.getId(),
-            post.getCreateDate(),
-            post.getModifyDate(),
-            post.getAuthor().getId(),
-            post.getAuthor().getNickname(),
-            post.getTitle(),
-            post.getContent()
-        );
-    }
 }

@@ -15,6 +15,7 @@ import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,10 @@ public class MarketSupport {
     private final MarketMemberRepository marketMemberRepository;
     private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
+
+    public Optional<Order> findOrderById(int id) {
+        return orderRepository.findById(id);
+    }
 
     public long countProducts() {
         return productRepository.count();

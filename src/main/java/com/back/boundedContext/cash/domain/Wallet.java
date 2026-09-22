@@ -35,16 +35,17 @@ public class Wallet extends BaseManualIdAndTime {
         return balance > 0;
     }
 
+    // 자발적 잔액 충전 외 다른 캐시 이벤트 등록 시 사용하는 메소드로 보임
     public void credit(long amount, CashLog.EventType eventType, String relTypeCode, int relId) {
         balance += amount;
 
         addCashLog(amount, eventType, relTypeCode, relId);
     }
-
+    // (Wallet의 주인 holder 의 최상위 부모 추상메소드를 통해 id와 클래스 정보를 가져옴 (= CashMember [자발적 잔액 충전])
     public void credit(long amount, CashLog.EventType eventType, BaseEntity rel) {
         credit(amount, eventType, rel.getModelTypeCode(), rel.getId());
     }
-
+    // (자발적 잔액 충전, ... ) 에 경우 사용되는 메소드
     public void credit(long amount, CashLog.EventType eventType) {
         credit(amount, eventType, holder);
     }

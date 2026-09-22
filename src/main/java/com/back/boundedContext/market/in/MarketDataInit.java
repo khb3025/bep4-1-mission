@@ -1,9 +1,13 @@
 package com.back.boundedContext.market.in;
+import com.back.boundedContext.market.app.MarketCancelOrderRequestPaymentUseCase;
+import com.back.boundedContext.market.app.MarketCompleteOrderPaymentUseCase;
 import com.back.boundedContext.market.app.MarketFacade;
 import com.back.boundedContext.market.app.Order;
 import com.back.boundedContext.market.domain.Cart;
 import com.back.boundedContext.market.domain.MarketMember;
 import com.back.boundedContext.market.domain.Product;
+import com.back.shared.Cash.event.CashOrderPaymentFailedEvent;
+import com.back.shared.Cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.post.dto.PostDto;
 import com.back.shared.post.out.PostApiClient;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +18,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @Slf4j
@@ -38,6 +43,7 @@ public class MarketDataInit {
             self.makeBaseProducts();
             self.makeBaseCartItems();
             self.makeBaseOrders();
+            self.makeBasePaidOrders();
         };
     }
 
@@ -180,5 +186,15 @@ public class MarketDataInit {
         cart1.addItem(product3);
         cart1.addItem(product4);
     }
+
+    @Transactional
+    public void makeBasePaidOrders() {
+        Order order1 = marketFacade.findOrderById(1).get();
+
+        if (order1.isPaid()) return;
+
+        marketFacade.requestPayment(order1, 0);
+    }
+
 
 }

@@ -3,6 +3,8 @@ package com.back.boundedContext.market.in;
 import com.back.boundedContext.cash.domain.CashMember;
 import com.back.boundedContext.market.app.MarketFacade;
 import com.back.boundedContext.market.domain.MarketMember;
+import com.back.shared.Cash.event.CashOrderPaymentFailedEvent;
+import com.back.shared.Cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.market.event.MarketMemberCreatedEvent;
 import com.back.shared.member.event.MemberJoinedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;
@@ -37,5 +39,17 @@ public class MarketListener {
     @Transactional(propagation = REQUIRES_NEW)
     public void handle(MarketMemberCreatedEvent event) {
         marketFacade.createCart(event.getMember());
+    }
+
+    @TransactionalEventListener(phase = AFTER_COMMIT)
+    @Transactional(propagation = REQUIRES_NEW)
+    public void handle(CashOrderPaymentSucceededEvent event) {
+        marketFacade.handle(event);
+    }
+
+    @TransactionalEventListener(phase = AFTER_COMMIT)
+    @Transactional(propagation = REQUIRES_NEW)
+    public void handle(CashOrderPaymentFailedEvent event) {
+        marketFacade.handle(event);
     }
 }

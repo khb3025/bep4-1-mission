@@ -13,6 +13,7 @@ import tools.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+// 토스 공식 샘플 코드 :  https://github.com/tosspayments/tosspayments-sample/blob/main/spring-javascript/src/main/java/com/example/demo/controller/PaymentController.java
 @Service
 public class TossPaymentsService {
 

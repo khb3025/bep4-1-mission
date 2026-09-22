@@ -1,6 +1,5 @@
 package com.back.boundedContext.market.domain;
 
-import com.back.boundedContext.market.app.MarketPolicy;
 import com.back.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

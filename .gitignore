@@ -38,3 +38,4 @@ out/
 
 ###
 db_dev.*
+.env

@@ -1,6 +1,6 @@
 package com.back.shared.market.dto;
 
-import com.back.boundedContext.market.app.Order;
+import com.back.boundedContext.market.domain.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

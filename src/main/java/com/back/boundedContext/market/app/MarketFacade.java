@@ -2,6 +2,7 @@ package com.back.boundedContext.market.app;
 
 import com.back.boundedContext.market.domain.Cart;
 import com.back.boundedContext.market.domain.MarketMember;
+import com.back.boundedContext.market.domain.Order;
 import com.back.boundedContext.market.domain.Product;
 import com.back.global.RsData.RsData;
 import com.back.shared.Cash.event.CashOrderPaymentFailedEvent;
@@ -12,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.datatransfer.Clipboard;
-import java.util.List;
 import java.util.Optional;
 
 @Service

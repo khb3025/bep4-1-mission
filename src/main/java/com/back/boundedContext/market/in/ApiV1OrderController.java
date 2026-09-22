@@ -2,16 +2,20 @@ package com.back.boundedContext.market.in;
 
 import com.back.boundedContext.market.app.MarketFacade;
 import com.back.boundedContext.market.domain.Order;
+import com.back.boundedContext.market.domain.OrderItem;
 import com.back.global.RsData.RsData;
 import com.back.global.exception.DomainException;
 import com.back.shared.cash.out.CashApiClient;
 import com.back.shared.market.out.TossPaymentsService;
+import com.back.shared.payout.dto.OrderItemDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -71,4 +75,17 @@ public class ApiV1OrderController {
 
         return new RsData<>("202-1", "결제 프로세스가 시작되었습니다.");
     }
+
+    @GetMapping("/{id}/items")
+    @Transactional(readOnly = true)
+    public List<OrderItemDto> getItems(@PathVariable int id) {
+        return marketFacade
+                .findOrderById(id)
+                .get()
+                .getItems()
+                .stream()
+                .map(OrderItem::toDto)
+                .toList();
+    }
+
 }

@@ -8,6 +8,7 @@ import com.back.global.RsData.RsData;
 import com.back.shared.Cash.event.CashOrderPaymentFailedEvent;
 import com.back.shared.Cash.event.CashOrderPaymentSucceededEvent;
 import com.back.shared.market.dto.MarketMemberDto;
+import com.back.shared.market.dto.OrderDto;
 import com.back.shared.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -95,13 +96,12 @@ public class MarketFacade {
     }
 
     @Transactional
-    public void handle(CashOrderPaymentSucceededEvent event) {
-        marketCompleteOrderPaymentUseCase.handle(event);
+    public void completeOrderPayment(int orderId) {
+        marketCompleteOrderPaymentUseCase.completePayment(orderId);
     }
 
     @Transactional
-    public void handle(CashOrderPaymentFailedEvent event) {
-        marketCancelOrderRequestPaymentUseCase.handle(event);
+    public void cancelOrderRequestPayment(int orderId) {
+        marketCancelOrderRequestPaymentUseCase.cancelRequestPayment(orderId);
     }
-
 }

@@ -49,9 +49,9 @@ public class PayoutDataInit {
     public ApplicationRunner payoutDataInitApplicationRunner() {
         return args -> {
             self.forceMakePayoutReadyCandidatesItems();
-            self.collectPayoutItemsMore();
-            self.completePayoutsMore();
-            self.runCollectItemsAndCompletePayoutsBatchJob();
+            // self.collectPayoutItemsMore();
+            // self.completePayoutsMore();
+            // self.runCollectItemsAndCompletePayoutsBatchJob();
         };
     }
 

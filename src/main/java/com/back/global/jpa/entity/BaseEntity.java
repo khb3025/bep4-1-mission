@@ -25,4 +25,6 @@ public abstract class BaseEntity implements HasModelTypeCode {
     protected void publishEvent(Object event) {
         GlobalConfig.getEventPublisher().publish(event);
     }
+
+
 }

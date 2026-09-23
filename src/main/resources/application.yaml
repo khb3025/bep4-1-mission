@@ -24,8 +24,10 @@ spring:
         highlight_sql: true
         use_sql_comments: true
         default_batch_fetch_size: 100
+
+  ## 게빌환경에서 계속 batch를 돌리지않음
   batch:
-    job:
+    job: # Batch 작업의 단위
       enabled: false
 
 custom:

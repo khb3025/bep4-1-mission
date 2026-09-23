@@ -17,8 +17,9 @@ import javax.sql.DataSource;
 public class BatchConfig {
 
     @Bean
-    @Profile("!prod")
+    @Profile("!prod") // 개발환경이 아닐경우 동작
     public DataSourceInitializer notProdDataSourceInitializer(DataSource dataSource) {
+        // 개발 테스트 환경에서는 h2용 배치 메타데이터를 넣어달라는 설정
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("/org/springframework/batch/core/schema-h2.sql"));
         populator.setContinueOnError(true);

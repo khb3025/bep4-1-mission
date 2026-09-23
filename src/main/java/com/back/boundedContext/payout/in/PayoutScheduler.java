@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-// @Profile("prod")
+@Profile("prod")
 @Component
 @RequiredArgsConstructor
 public class PayoutScheduler {
@@ -24,7 +24,7 @@ public class PayoutScheduler {
     private final Job payoutCollectItemsAndCompletePayoutsJob;
 
     // 매일 01:00 (KST)
-    @Scheduled(cron = "0 * * * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 1 * * *", zone = "Asia/Seoul")
     public void runAt01() throws JobInstanceAlreadyCompleteException, InvalidJobParametersException,
             JobExecutionAlreadyRunningException, JobRestartException {
         runCollectItemsAndCompletePayoutsBatchJob();
